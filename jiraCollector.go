@@ -2,8 +2,7 @@ package GoJiraTools
 
 import (
 	//"net/http"
-	S "strings"
-	"strconv"
+	"fmt"
 )
 
 // container of JiraConnect information
@@ -43,9 +42,7 @@ func NewJiraConnection(protocol string, host string, port int, username string,
 
 	jc.apiVersion = apiVersion
 
-	uriParts := []string{jc.protocol + "://" + jc.host + ":" + strconv.Itoa(jc.port), strconv.Itoa(apiVersion)}
-
-	jc.baseURI = S.Join(uriParts, "/")
+	jc.baseURI = fmt.Sprintf("%s://%s:%d/%d", jc.protocol, jc.host, jc.port, jc.apiVersion);
 
 	return &jc
 
