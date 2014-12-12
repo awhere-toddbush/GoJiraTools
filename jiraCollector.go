@@ -1,7 +1,7 @@
 package GoJiraTools
 
 import (
-	//"net/http"
+	http "net/http"
 	"fmt"
 )
 
@@ -48,7 +48,17 @@ func NewJiraConnection(protocol string, host string, port int, username string,
 
 }
 
-func fetchIssue(JiraConnection jc, issueId string) {
-	
+func makeRequest(jc *JiraConnection) (*http.Request, error) {
+	r, err := http.NewRequest("GET", jc.baseURI, nil);
+
+	if(err != nil) {
+		return nil, err
+	}
+
+	return r, nil
+}
+
+func fetchIssue(jc *JiraConnection, issueId string) {
+
 }
 

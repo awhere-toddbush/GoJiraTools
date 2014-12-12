@@ -3,6 +3,7 @@ package GoJiraTools
 import (
 	"fmt"
 	"testing"
+//	http "net/http"
 )
 
 var PROTOCOL = "http"
@@ -40,5 +41,19 @@ func TestNewJiraConnectionDefaults(t *testing.T){
 
 	if(jc.protocol != PROTOCOL) {
 		t.Errorf("protocol should be %s, not %s", PROTOCOL, jc.protocol)
+	}
+}
+
+func TestMakeRequest(t *testing.T){
+	jc:= NewJiraConnection("",HOST,0,USER,PASS,APIVERSION,SSL)
+
+	r ,err := makeRequest(jc)
+
+	if(err != nil) {
+		t.Errorf("error throw %s", err)
+	}
+
+	if(r == nil) {
+		t.Errorf("request is nil")
 	}
 }
