@@ -48,3 +48,7 @@ func NewJiraConnection(protocol string, host string, port int, username string,
 
 }
 
+func fetchIssue(JiraConnection jc, issueId string) {
+	
+}
+
