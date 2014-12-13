@@ -22,26 +22,23 @@ type JiraConnection struct {
 func NewJiraConnection(protocol string, host string, port int, username string, 
 		password string, apiVersion int, stringSSL bool) *JiraConnection {
 
-	jc := JiraConnection{}
+	jc := JiraConnection{protocol, host, port, username, password, apiVersion, stringSSL,""}
 
+	// default protocol to httep
 	if len(protocol) > 0 {
 		jc.protocol = protocol
 	} else {
 		jc.protocol = "http"
 	}
 
-	jc.host = host
+	// default port to 80s
 	if port != 0 {
 		jc.port = port
 	} else {
 		jc.port = 80
 	}
 
-	jc.username = username
-	jc.password = password
-
-	jc.apiVersion = apiVersion
-
+	// create the baseURI
 	jc.baseURI = fmt.Sprintf("%s://%s:%d/%d", jc.protocol, jc.host, jc.port, jc.apiVersion);
 
 	return &jc
