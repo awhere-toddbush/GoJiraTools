@@ -59,7 +59,8 @@ func makeRequest(jc *JiraConnection, payload []byte) (*http.Request, error) {
 	return r, nil
 }
 
-func fetchIssue(jc *JiraConnection, issueId string) {
-
+func findIssue(jc *JiraConnection, issueId string) {
+	urlPart := "/issue/" + issueId
+	
 }
 
