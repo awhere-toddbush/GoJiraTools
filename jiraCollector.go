@@ -2,6 +2,7 @@ package GoJiraTools
 
 import (
 	http "net/http"
+	"bytes"
 	"fmt"
 )
 
@@ -45,8 +46,11 @@ func NewJiraConnection(protocol string, host string, port int, username string,
 
 }
 
-func makeRequest(jc *JiraConnection) (*http.Request, error) {
-	r, err := http.NewRequest("GET", jc.baseURI, nil);
+func makeRequest(jc *JiraConnection, payload []byte) (*http.Request, error) {
+	
+	payloadBuffer := bytes.NewBuffer(payload)
+
+	r, err := http.NewRequest("GET", jc.baseURI, payloadBuffer);
 
 	if(err != nil) {
 		return nil, err

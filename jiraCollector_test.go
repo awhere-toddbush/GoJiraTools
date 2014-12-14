@@ -47,7 +47,7 @@ func TestNewJiraConnectionDefaults(t *testing.T){
 func TestMakeRequest(t *testing.T){
 	jc:= NewJiraConnection("",HOST,0,USER,PASS,APIVERSION,SSL)
 
-	r ,err := makeRequest(jc)
+	r ,err := makeRequest(jc, nil)
 
 	if(err != nil) {
 		t.Errorf("error throw %s", err)
