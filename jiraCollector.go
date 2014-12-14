@@ -46,21 +46,31 @@ func NewJiraConnection(protocol string, host string, port int, username string,
 
 }
 
-func makeRequest(jc *JiraConnection, payload []byte) (*http.Request, error) {
+func makeRequest(jc *JiraConnection, urlsuffix string, payload []byte) (*http.Request, error) {
 	
 	payloadBuffer := bytes.NewBuffer(payload)
 
-	r, err := http.NewRequest("GET", jc.baseURI, payloadBuffer);
+	r, err := http.NewRequest("GET", jc.baseURI + urlsuffix, payloadBuffer);
 
 	if(err != nil) {
 		return nil, err
 	}
+
+	r.SetBasicAuth(jc.username, jc.password)
 
 	return r, nil
 }
 
 func findIssue(jc *JiraConnection, issueId string) {
 	urlPart := "/issue/" + issueId
-	
+
+	r, err := makeRequest(jc, urlPart, nil)
+
+	if(err != nil || r == nil){
+		return;
+	}
+
+
+
 }
 
